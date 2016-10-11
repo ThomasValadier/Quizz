@@ -19,7 +19,7 @@ $(function () {
         var how = compt
         var insert_how = how + 1
         if (how <= 5) {
-            $('#clickAdd').html('<button id="click_add">Ajouter reponse</button>')
+            $('#clickAdd').html('<button id="click_add" style="border: inherit; background-color: inherit; color: darkgreen" class="glyphicon glyphicon-plus"></button>')
             $('#click_add').click(function () {
 
                 var elem_affich = $("input[name = 'option" + insert_how + "']")
@@ -28,14 +28,14 @@ $(function () {
                 test();
             })
             if (how > 2) {
-                $('#clickDel').html('<button id="click_del">Supprimer réponse</button>')
+                $('#clickDel').html('<button id="click_del" style="border:inherit;background-color: inherit;color: red;"class="glyphicon glyphicon-minus"></button>')
                 $('#click_del').click(function () {
                     $("input[name = 'option" + how + "']").val('').css('display', 'none')
                     li1 = null
                     var background = $("#li" + how).css("background-color")
                     // alert(background)
                     for (i = 1; i < insert_how; i++) {
-                        $('#li' + i).css('background-color', 'inherit')
+                        $('#li' + i).attr('class', 'btn btn-danger')
                     }
                     // if (background === "rgb(211, 211, 211)")
                     //  alert('toto')
@@ -69,7 +69,7 @@ $(function () {
         $('#li1').css({
             display: 'inline'
         })
-        $('#li1').attr('class', "btn btn-default")
+        $('#li1').attr('class', "btn btn-danger")
         if (value == "")
             $('#li1').attr('class', "inherit")
 
@@ -80,7 +80,7 @@ $(function () {
         var value = $(this).val()
         $('#li2').html(value)
         $('#li2').css('display', 'inline')
-        $('#li2').attr('class', "btn btn-default")
+        $('#li2').attr('class', "btn btn-danger")
         if (value == "")
             $('#li2').attr('class', "inherit")
 
@@ -90,7 +90,7 @@ $(function () {
         var value = $(this).val()
         $('#li3').html(value)
         $('#li3').css('display', 'inline')
-        $('#li3').attr('class', "btn btn-default")
+        $('#li3').attr('class', "btn btn-danger")
         if (value == "")
             $('#li3').attr('class', "inherit")
     })
@@ -98,7 +98,7 @@ $(function () {
         var value = $(this).val()
         $('#li4').html(value)
         $('#li4').css('display', 'inline')
-        $('#li4').attr('class', "btn btn-default")
+        $('#li4').attr('class', "btn btn-danger")
         if (value == "")
             $('#li4').attr('class', "inherit")
     })
@@ -106,7 +106,7 @@ $(function () {
         var value = $(this).val()
         $('#li5').html(value)
         $('#li5').css('display', 'inline')
-        $('#li5').attr('class', "btn btn-default")
+        $('#li5').attr('class', "btn btn-danger")
         if (value == "")
             $('#li5').attr('class', "inherit")
     })
@@ -115,12 +115,12 @@ $(function () {
     $('#li1').click(function () {
         if (compteur2 == 0 && compteur3 == 0 && compteur4 == 0 && compteur5 == 0) {
             if (compteur1 == 0) {
-                $(this).css("background-color", "lightgrey")
+                $(this).attr("class", "btn btn-success")
                 compteur1++
                 li1 = $(this).html()
             }
             else {
-                $(this).css("background-color", "inherit")
+                $(this).attr("class", "btn btn-danger")
                 compteur1 = 0
                 li1 = null
             }
@@ -133,12 +133,12 @@ $(function () {
     $('#li2').click(function () {
         if (compteur1 == 0 && compteur3 == 0 && compteur4 == 0 && compteur5 == 0) {
             if (compteur2 == 0) {
-                $(this).css("background-color", "lightgrey")
+                $(this).attr("class", "btn btn-success")
                 compteur2++
                 li1 = $(this).html()
             }
             else {
-                $(this).css("background-color", "inherit")
+                $(this).attr("class", "btn btn-danger")
                 compteur2 = 0
                 li1 = null
             }
@@ -151,12 +151,12 @@ $(function () {
     $('#li3').click(function () {
         if (compteur1 == 0 && compteur2 == 0 && compteur4 == 0 && compteur5 == 0) {
             if (compteur3 == 0) {
-                $(this).css("background-color", "lightgrey")
+                $(this).attr("class", "btn btn-success")
                 compteur3++
                 li1 = $(this).html()
             }
             else {
-                $(this).css("background-color", "inherit")
+                $(this).attr("class", "btn btn-danger")
                 compteur3 = 0
                 li1 = null
             }
@@ -169,12 +169,12 @@ $(function () {
     $('#li4').click(function () {
         if (compteur1 == 0 && compteur3 == 0 && compteur2 == 0 && compteur5 == 0) {
             if (compteur4 == 0) {
-                $(this).css("background-color", "lightgrey")
+                $(this).attr("class", "btn btn-success")
                 compteur4++
                 li1 = $(this).html()
             }
             else {
-                $(this).css("background-color", "inherit")
+                $(this).attr("class", "btn btn-danger")
                 compteur4 = 0
                 li1 = null
             }
@@ -187,12 +187,12 @@ $(function () {
     $('#li5').click(function () {
         if (compteur1 == 0 && compteur3 == 0 && compteur4 == 0 && compteur2 == 0) {
             if (compteur5 == 0) {
-                $(this).css("background-color", "lightgrey")
+                $(this).attr("class", "btn btn-success")
                 compteur5++
                 li1 = $(this).html()
             }
             else {
-                $(this).css("background-color", "inherit")
+                $(this).attr("class", "btn btn-danger")
                 compteur5 = 0
                 li1 = null
             }
@@ -202,21 +202,43 @@ $(function () {
         }
     })
 
+
     $('#send').click(function () {
+        var howNotEmpty = 0
+        for (i = 1; i < 6; i++) {
+          var content = $('#option' + i).val()
+            if (content != "") {
+                howNotEmpty++
+            }
+
+        }
+
         var ques = $('#questions').val()
         var op1 = $('#option1').val()
         var op2 = $('#option2').val()
         var op3 = $('#option3').val()
         var op4 = $('#option4').val()
         var op5 = $('#option5').val()
-        if (ques == "") {
-            alert("Sans question...")
-        }
-            else if (op1 =="" || op2 ==""){
-            alert("Sans reponse...")
-        }
-            else if (li1 == null){
-            alert("Sans bonne réponse..")
+
+
+        if (ques == "" || howNotEmpty < 2 || li1 == null) {
+            if (ques == "") {
+                $("#err").css("display", "inline")
+            }
+            else
+                $("#err").hide()
+
+            if (howNotEmpty < 2) {
+                $("#err1").css("display", "inline")
+            }
+            else
+                $("#err1").hide()
+
+            if (li1 == null) {
+                $("#err2").css("display", "inline")
+            }
+            else
+                $("#err2").hide()
         }
         else {
             $.ajax({
@@ -228,12 +250,14 @@ $(function () {
                     if (nbReponse < 3) {
                         $("input").val('')
                         li1 = null
-
-                        $("#place_for_question li").css('background-color', 'inherit')
+                        $("#place_for_question li").attr("class", "btn btn-danger")
                         $("#place_for_question li").hide();
                         $('#option3').css('display', 'none')
                         $('#option4').css('display', 'none')
                         $('#option5').css('display', 'none')
+                        $('#err').hide()
+                        $('#err1').hide()
+                        $('#err2').hide()
                         compteur1 = 0
                         compteur2 = 0
                         compteur3 = 0

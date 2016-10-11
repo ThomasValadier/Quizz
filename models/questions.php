@@ -108,4 +108,15 @@ class questions
         $stmt->execute([$question, $option1, $option2, $option3, $option4, $option5, $correct]);
     }
 
+    public function viewCategorie()
+    {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $sql = 'SELECT nom_categorie FROM categories';
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
+
 }
