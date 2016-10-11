@@ -10,7 +10,7 @@ $(function () {
 
 
     function test() {
-        $('#comptage').html(nbReponse+"/20")
+        $('#comptage').html(nbReponse + "/20")
         var compt = 0
         for (i = 0; i < max + 1; i++) {
             if ($('input[name ="option' + i + '"]').is(':visible'))
@@ -209,33 +209,44 @@ $(function () {
         var op3 = $('#option3').val()
         var op4 = $('#option4').val()
         var op5 = $('#option5').val()
-        $.ajax({
-            url: 'accueil.php',
-            type: 'GET',
-            data: 'reponse=' + li1 + '&option1=' + op1 + '&option2=' + op2 + '&question=' + ques + '&option3=' + op3 +
-            '&option4=' + op4 + '&option5=' + op5,
-            success: function () {
-                if (nbReponse<3){
-                $("input").val('')
-                li1 = null
+        if (ques == "") {
+            alert("Sans question...")
+        }
+            else if (op1 =="" || op2 ==""){
+            alert("Sans reponse...")
+        }
+            else if (li1 == null){
+            alert("Sans bonne réponse..")
+        }
+        else {
+            $.ajax({
+                url: 'accueil.php',
+                type: 'GET',
+                data: 'reponse=' + li1 + '&option1=' + op1 + '&option2=' + op2 + '&question=' + ques + '&option3=' + op3 +
+                '&option4=' + op4 + '&option5=' + op5,
+                success: function () {
+                    if (nbReponse < 3) {
+                        $("input").val('')
+                        li1 = null
 
-                $("#place_for_question li").css('background-color', 'inherit')
-                $("#place_for_question li").hide();
-                 $('#option3').css('display', 'none')
-                $('#option4').css('display', 'none')
-                $('#option5').css('display', 'none')
-                compteur1 = 0
-                compteur2 = 0
-                compteur3 = 0
-                compteur4 = 0
-                compteur5 = 0
-                nbReponse++
-                test()
+                        $("#place_for_question li").css('background-color', 'inherit')
+                        $("#place_for_question li").hide();
+                        $('#option3').css('display', 'none')
+                        $('#option4').css('display', 'none')
+                        $('#option5').css('display', 'none')
+                        compteur1 = 0
+                        compteur2 = 0
+                        compteur3 = 0
+                        compteur4 = 0
+                        compteur5 = 0
+                        nbReponse++
+                        test()
 
-            }
-                else
-                    alert("fini")
-            }
-        })
+                    }
+                    else
+                        alert("fini")
+                }
+            })
+        }
     })
 })
