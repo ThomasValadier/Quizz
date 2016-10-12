@@ -3,6 +3,7 @@
 class questions
 {
     private $correct;
+    private $quiz;
     private $question;
     private $option1;
     private $option2;
@@ -11,7 +12,7 @@ class questions
     private $option5;
 
     public function __construct($question = null, $option1 = null, $option2 = null, $option3 = null, $option4 = null, $option5 = null,
-                                $correct = null)
+                                $correct = null, $quiz = null)
     {
         $this->question = $question;
         $this->option1 = $option1;
@@ -20,6 +21,7 @@ class questions
         $this->option4 = $option4;
         $this->option5 = $option5;
         $this->correcte = $correct;
+        $this->quiz = $quiz;
     }
 
     public function getQuestion()
@@ -92,6 +94,16 @@ class questions
         $this->option5 = $option5;
     }
 
+    public function getQuizz()
+    {
+        return $this->quiz;
+    }
+
+    public function setQuizz($quiz)
+    {
+        $this->quiz = $quiz;
+    }
+
     public function addQuestion()
     {
         require_once 'dbConnect.php';
@@ -103,16 +115,18 @@ class questions
         $option4 = $this->getOption4();
         $option5 = $this->getOption5();
         $correct = $this->getCorrect();
-        $sql = 'INSERT INTO question (question, option1, option2, option3, option4, option5, correct) VALUES (?, ?, ?, ?, ? ,? ,?)';
+        $quiz = $this->getQuizz();
+        $sql = 'INSERT INTO question (question, option1, option2, option3, option4, option5, correct, id_quizz) VALUES (?, ?, ?, ?, ? ,? ,?,?)';
         $stmt = $pdo->getBDD()->prepare($sql);
-        $stmt->execute([$question, $option1, $option2, $option3, $option4, $option5, $correct]);
+        $stmt->execute([$question, $option1, $option2, $option3, $option4, $option5, $correct, $quiz]);
     }
 
-    public function viewCategorie()
+
+    function viewCategorie()
     {
         require_once 'dbConnect.php';
         $pdo = new DB();
-        $sql = 'SELECT nom_categorie FROM categories';
+        $sql = 'SELECT DISTINCT categorie FROM categories';
         $stmt = $pdo->getBDD()->prepare($sql);
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_OBJ);
