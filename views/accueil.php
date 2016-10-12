@@ -89,3 +89,4 @@
     <script src="../assets/javascript/homePage.js"></script>
 
 
+    <script type="text/javascript" src="../assets/javascript/connec_ins.js"></script>

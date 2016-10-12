@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
     var compteur1 = 0
     var compteur2 = 0
     var compteur3 = 0

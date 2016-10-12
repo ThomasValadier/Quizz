@@ -16,3 +16,4 @@
     <br>
     <button name="send" class="btn btn-success col-md-4 col-md-offset-4" type="submit">Créer</button>
 </form>
+<script type="text/javascript" src="../assets/javascript/connec_ins.js"></script>

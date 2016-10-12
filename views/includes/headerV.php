@@ -53,9 +53,18 @@
                     </button>
                 </form>
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#">toto</a></li>
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#connect">
+                        Connexion
+                    </button>
+
+
+
+
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container-fluid -->
     </nav>
 </header>
+

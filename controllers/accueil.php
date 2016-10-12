@@ -1,5 +1,7 @@
 <?php
+
 require '../views/includes/headerV.php';
+//require "../views/includes/modal.php";
 require '../views/includes/footer.php';
 require '../models/questions.php';
 
