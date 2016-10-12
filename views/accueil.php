@@ -1,4 +1,5 @@
 </div>
+<p id="quizz" hidden><?= $_GET['quizz'] ?></p>
 <h3 style="text-align: center" id="comptage"></h3>
 <div id="response">
 
