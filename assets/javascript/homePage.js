@@ -44,7 +44,7 @@ $(function () {
                     compteur3 = 0
                     compteur4 = 0
                     //compteur + "" = 0
-                    //  $("#li" + how).css("background-color", "inherit")
+                   // $("#li" + how).("background-color", "inherit")
                     $('#li' + how).hide()
                     $("#click_add").show()
                     test()
@@ -241,11 +241,13 @@ $(function () {
                 $("#err2").hide()
         }
         else {
+            var idq = $('#quizz').html()
+
             $.ajax({
                 url: 'accueil.php',
                 type: 'GET',
                 data: 'reponse=' + li1 + '&option1=' + op1 + '&option2=' + op2 + '&question=' + ques + '&option3=' + op3 +
-                '&option4=' + op4 + '&option5=' + op5,
+                '&option4=' + op4 + '&option5=' + op5 + '&quizz=' +idq,
                 success: function () {
                     if (nbReponse < 3) {
                         $("input").val('')

@@ -9,7 +9,19 @@ $result = $ques->viewCategorie();
 require '../views/ajoutquizz.php';
 
 
-if (isset($_GET['send'])) {
-    header('location: accueil.php');
+if (isset($_POST['send'])) {
+    if (!empty($_POST['categorie']) && !empty($_POST['titre'])) {
+        require_once '../models/quizz.class.php';
+        $categorie = strtolower(htmlspecialchars(($_POST['categorie'])));
+        $title = htmlspecialchars(addslashes($_POST['titre']));
+        $add = new quizz($title, $categorie);
+        $add->addQuizz();
+        $resu = $add->seeID();
+        $data = $resu->id_quizz;
+        header('location:accueil.php?quizz=' . $data);
+    } else {
+        ?>
+        <script>alert("rempli tous les champs batard")</script><?php
+    }
 }
 
