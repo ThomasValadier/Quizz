@@ -8,7 +8,7 @@ class users
     private $email;
     private $actif;
 
-    public function __construct($login, $password, $email, $role = "membre", $actif = false)
+    public function __construct($login = null, $password = null, $email = null, $role = "membre", $actif = false)
     {
         $this->login = $login;
         $this->password = $password;
@@ -99,22 +99,25 @@ class users
 
     public function verifuser()
     {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
         $sql = "SELECT id_user FROM users WHERE login = ? AND password = ?";
-        $stmt = $this->DB->getBDD()->prepare($sql);
-        $stmt->execute([$this->login, $this->password]);
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$this->getLogin(), $this->getPassword()]);
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         if (count($res) == 0) {
-            return true;
+            return false;
         } else
-            echo '<script>alert("Votre compte existe déjà")</script>';
-        return false;
+            return true;
     }
 
     public function connexion()
     {
-        $sql = "SELECT * FROM users WHERE login = ? AND password = ? AND actif = true";
-        $stmt = $this->DB->getBDD()->prepare($sql);
-        $stmt->execute([$this->login, $this->password]);
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $sql = "SELECT * FROM users WHERE login LIKE ? AND password LIKE ? AND actif LIKE ?";
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$this->getLogin(), $this->getPassword(), true]);
         $res = $stmt->fetchAll(PDO::FETCH_OBJ);
         if (count($res) == 1) {
             foreach ($res as $cle):
@@ -124,8 +127,9 @@ class users
                     'role' => $cle->role
                 );
             endforeach;
+            return true;
         } else
-            echo '<script>alert("Vos identifiants de connexion sont mauvais ou votre compte n\'a pas été activé.")</script>';
+            return false;
     }
 
     public function deconnexion()
@@ -133,7 +137,21 @@ class users
         session_destroy();
     }
 
-    public function insertUser()
+    public function seeId()
+    {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $email = $this->getEmail();
+        $login = $this->getLogin();
+        $sql = "SELECT id_user FROM users WHERE login LIKE ? AND email LIKE ? ";
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$login, $email]);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        $id = $result->id_user;
+        return $id;
+    }
+
+    public function insertUser($cle)
     {
         require_once 'dbConnect.php';
         $pdo = new DB();
@@ -144,12 +162,12 @@ class users
         $act = $this->getActif();
         // $mail = new mail;
         // $mail->mailIns($this->email, $cle, $this->login);
-        $sql = 'INSERT INTO users (login, password, role, email, actif) VALUES (?,?,?,?,?)';
+        $sql = 'INSERT INTO users (login, password, role, email, actif,cle) VALUES (?,?,?,?,?,?)';
         $stmt = $pdo->getBDD()->prepare($sql);
-        $stmt->execute([$login, $psw, $role, $email, $act]);
+        $stmt->execute([$login, $psw, $role, $email, $act, $cle]);
+
+
     }
-
-
 
 
 }

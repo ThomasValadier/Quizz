@@ -9,15 +9,17 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <input class="form-control" required="required" autofocus placeholder="login" type="text">
+                    <input class="form-control" id="log" required="required" autofocus placeholder="login" type="text">
                 </div>
                 <div class="form-group">
-                    <input class="form-control" required="required" class="sign-up-input" placeholder="password"
+                    <input class="form-control" id="pass" required="required" class="sign-up-input" placeholder="password"
                            type="text">
                 </div>
+
+
             </div>
             <div class="modal-footer">
-                <button type="submit" class="sign-up-button btn btn-info">Connexion</button>
+                <button type="submit" id="connexion" class="sign-up-button btn btn-info">Connexion</button>
                 <!-- Trigger the modal with a button -->
                 <button id="insForm" type="submit" class="btn btn-info" data-dismiss="modal" data-toggle="modal"
                         data-target="#inscript">
