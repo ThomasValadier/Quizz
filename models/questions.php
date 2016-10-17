@@ -133,4 +133,28 @@ class questions
         return $result;
     }
 
+    function seeQuestion($id)
+    {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $sql = "SELECT min(id_question) FROM categories ca, question q
+         WHERE  ca.id_quizz = q.id_quizz AND ca.id_quizz = ? ";
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$id]);
+        $result = $stmt->fetch(PDO::FETCH_COLUMN);
+        return $result;
+    }
+
+    function seeOneQuestion($id, $id_qui)
+    {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $sql = "SELECT question FROM question WHERE id_question = ? AND id_quizz = ? GROUP BY question";
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$id, $id_qui]);
+        $result = $stmt->fetch(PDO::FETCH_COLUMN);
+        return $result;
+    }
+
+
 }

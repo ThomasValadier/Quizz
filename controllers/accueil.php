@@ -1,7 +1,7 @@
 <?php
 
 require '../views/includes/headerV.php';
-//require "../views/includes/modal.php";
+require "../views/includes/modal.php";
 require '../views/includes/footer.php';
 require '../models/questions.php';
 
@@ -29,5 +29,6 @@ if (!empty($_GET['quizz'])) {
         }
     }
 } else {
-    header("location: ajoutquizz_controller.php");
+    echo '<script>document.location = "ajoutquizz_controller.php"</script>';
+
 }

@@ -37,7 +37,8 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                            aria-expanded="false">Articles <span class="caret"></span></a>
                         <ul class="dropdown-menu">
-                            <li><a href="">Ajouter article</a></li>
+                            <li><a href="ajoutquizz_controller.php">Ajouter quizz</a></li>
+                            <li><a href="affQuizz.php">Choisir quizz</a></li>
                             <li><a href="">Ajouter catégorie</a></li>
                             <li><a href="">Administrer</a></li>
                             <li><a href="">Vu publique</a></li>
