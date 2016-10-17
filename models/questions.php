@@ -156,5 +156,17 @@ class questions
         return $result;
     }
 
+    function seeReponse($id_ques)
+    {
+        require_once 'dbConnect.php';
+        $pdo = new DB();
+        $sql = "SELECT * FROM question WHERE id_question = ?";
+        $stmt = $pdo->getBDD()->prepare($sql);
+        $stmt->execute([$id_ques]);
+        $result = $stmt->fetch(PDO::FETCH_OBJ);
+        return $result;
+
+    }
+
 
 }

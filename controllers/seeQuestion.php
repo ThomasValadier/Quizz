@@ -26,9 +26,12 @@ while ($res == false && $compt <= 20) {   //permet de ne pas charger une page si
     $result++;
     $res = $ques->seeOneQuestion($result, $id_qui);
 }
+// prévoir compteur quand c'est différent de false et continuer la boucle jusqua que ce compteur soit = à 20 car il doit
+// y avoir forcement 20 questions par quizz
 
 
-//$ques->seeReponse($id_quest);
+$reponse = $ques->seeReponse($result);
+
 //$ques->seeReponse($id_quest);
 require '../views/seeQuestion.php';
 

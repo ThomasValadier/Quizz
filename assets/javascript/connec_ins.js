@@ -209,4 +209,11 @@ $(function () {
         $('#validate').remove()
     })
 
+    $('#questSuiv').click(function(){
+        document.location = 'seeQuestion.php'; //objectif faire passer variable dans l'url en ajax,
+        //le but de l'ajax surtout de nous permettre de faire la redirection en javascript pour pourvoir mettre des
+        //condition avec un timer
+
+    })
+
 })
